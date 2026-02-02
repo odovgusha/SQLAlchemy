@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26e59a1c-38b9-4292-9731-51f0af58c093" name="Changes" comment="add routes for book and author">
+    <list default="true" id="26e59a1c-38b9-4292-9731-51f0af58c093" name="Changes" comment="added return render_template(&quot;add_author.html&quot;) to app.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,13 +98,22 @@
       <option name="project" value="LOCAL" />
       <updated>1770055665873</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added return render_template(&quot;add_author.html&quot;) to app.py">
+      <option name="closed" value="true" />
+      <created>1770059727006</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1770059727006</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial setup" />
     <MESSAGE value="defined basic book and author models in data_models.py and added minimal functionality to app.py" />
     <MESSAGE value="add routes for book and author" />
-    <option name="LAST_COMMIT_MESSAGE" value="add routes for book and author" />
+    <MESSAGE value="added return render_template(&quot;add_author.html&quot;) to app.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="added return render_template(&quot;add_author.html&quot;) to app.py" />
   </component>
 </project>
