@@ -28,6 +28,9 @@ def add_author():
 
         return render_template('add_author.html',success = True)
 
+    return render_template("add_author.html")
+
+
 
 @app.route('/add_book', methods=['GET','POST'])
 def add_book():
