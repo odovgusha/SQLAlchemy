@@ -1,29 +1,105 @@
+/* ---------- Theme Variables ---------- */
+:root {
+    --bg: #ffffff;
+    --text: #121212;
+    --card: #f2f2f2;
+    --border: #ccc;
+    --link: #1a73e8;
+    --input-bg: #ffffff;
+    --button-bg: #1a73e8;
+    --button-text: #ffffff;
+    --danger: #d93025;
+    --flash-bg: #e6ffe6;
+    --flash-border: #9be59b;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --bg: #121212;
+    --text: #e0e0e0;
+    --card: #1e1e1e;
+    --border: #333;
+    --link: #8ab4f8;
+    --input-bg: #1e1e1e;
+    --button-bg: #8ab4f8;
+    --button-text: #000;
+    --danger: #ff6b6b;
+    --flash-bg: #1f3b1f;
+    --flash-border: #3c7a3c;
+}
+
+/* ---------- Base ---------- */
 body {
     font-family: Arial, sans-serif;
     margin: 40px;
-    background: #f8f9fa;
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.2s, color 0.2s;
 }
 
 h1, h2 {
-    color: #333;
+    color: var(--text);
 }
 
-form {
-    margin-bottom: 20px;
+a {
+    color: var(--link);
+    text-decoration: none;
 }
 
-input, select, button {
+a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Forms ---------- */
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input, select {
+    width: 300px;
     padding: 8px;
     margin-top: 5px;
+    background-color: var(--input-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
 }
 
-button {
+/* ---------- Buttons ---------- */
+button, input[type="submit"] {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 
+button:hover {
+    opacity: 0.9;
+}
+
+/* ---------- Flash ---------- */
 .flash {
-    padding: 10px;
-    background: #e6ffe6;
-    border: 1px solid #b2ffb2;
-    margin-bottom: 15px;
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: var(--flash-bg);
+    border: 1px solid var(--flash-border);
+    border-radius: 4px;
+}
+
+/* ---------- Book Card ---------- */
+.book {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+.book button {
+    background-color: var(--danger);
+    color: #000;
 }

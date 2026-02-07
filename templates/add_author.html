@@ -2,38 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Author</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<h2>Add a New Author</h2>
+<h2>Add Author</h2>
+<button id="theme-toggle">🌙 Dark mode</button>
 
-<!-- Display flash messages -->
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
-      <p>{{ message }}</p>
+      <div class="flash">{{ message }}</div>
     {% endfor %}
   {% endif %}
 {% endwith %}
 
-<form action="/add_author" method="POST">
-  <label for="name">Author Name:</label>
-  <input type="text" id="name" name="name" required><br><br>
+<form method="POST">
+  <label>Name</label>
+  <input type="text" name="name" required>
 
-  <label for="birthdate">Birthdate:</label>
-  <input type="date" id="birthdate" name="birthdate" required><br><br>
+  <label>Birth date</label>
+  <input type="date" name="birthdate" required>
 
-  <label for="date_of_death">Date of Death:</label>
-  <input type="date" id="date_of_death" name="date_of_death"><br><br>
+  <label>Date of death</label>
+  <input type="date" name="date_of_death">
 
   <input type="submit" value="Add Author">
 </form>
 
 <p><a href="/">Back to Home</a></p>
+
+<script>
+  const toggleBtn = document.getElementById("theme-toggle");
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    toggleBtn.textContent = "☀️ Light mode";
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    const dark = document.documentElement.getAttribute("data-theme") === "dark";
+    if (dark) {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("theme", "light");
+      toggleBtn.textContent = "🌙 Dark mode";
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
+      toggleBtn.textContent = "☀️ Light mode";
+    }
+  });
+</script>
 
 </body>
 </html>
