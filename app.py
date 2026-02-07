@@ -1,12 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from datetime import datetime
 from data_models import db, Author, Book
+from sqlalchemy.exc import IntegrityError
+
 import os
 
 
 
 
 app = Flask(__name__)
+app.secret_key = "dev-secret-key"
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'data/library.sqlite')}"
 
@@ -65,9 +68,19 @@ def add_book():
         publication_year = int(request.form.get("publication_year"))
         author_id = int(request.form.get("author_id"))
 
-        book = Book(title=title, isbn=isbn, publication_year=publication_year, author_id=author_id)
-        db.session.add(book)
-        db.session.commit()
+        try:
+            book = Book(
+                title=request.form.get("title"),
+                isbn=request.form.get("isbn"),
+                publication_year=int(request.form.get("publication_year")),
+                author_id=int(request.form.get("author_id"))
+            )
+            db.session.add(book)
+            db.session.commit()
+            flash("Book added successfully ✅")
+        except IntegrityError:
+            db.session.rollback()
+            flash("A book with this ISBN already exists ⚠️")
 
         return redirect(url_for("add_book"))
 
@@ -86,6 +99,7 @@ def delete_book(book_id):
         db.session.delete(author)
         db.session.commit()
 
+    flash("Book deleted successfully 🗑️")
     return redirect(url_for("home"))
 
 if __name__ == "__main__":

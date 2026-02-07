@@ -8,7 +8,7 @@ class Author(db.Model):
     __tablename__ = "authors"
 
     id = db.Column(db.Integer, primary_key=True)  # primary key
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(100), nullable=False, unique=True)
     birth_date = db.Column(db.Date, nullable=False)
     date_of_death = db.Column(db.Date, nullable=True)  # Optional
 
