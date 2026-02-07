@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background: #f8f9fa;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input, select, button {
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.flash {
+    padding: 10px;
+    background: #e6ffe6;
+    border: 1px solid #b2ffb2;
+    margin-bottom: 15px;
+}
