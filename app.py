@@ -6,8 +6,6 @@ from sqlalchemy.exc import IntegrityError
 import os
 
 
-
-
 app = Flask(__name__)
 app.secret_key = "dev-secret-key"
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -45,18 +43,40 @@ def home():
 @app.route("/add_author", methods=["GET", "POST"])
 def add_author():
     if request.method == "POST":
-        name = request.form.get("name")
-        birthdate = datetime.strptime(request.form.get("birthdate"), "%Y-%m-%d").date()
-        date_of_death = request.form.get("date_of_death")
-        date_of_death = datetime.strptime(date_of_death, "%Y-%m-%d").date() if date_of_death else None
+        name = request.form.get("name", "").strip()
 
-        author = Author(name=name, birth_date=birthdate, date_of_death=date_of_death)
-        db.session.add(author)
-        db.session.commit()
+
+        if not name:
+            flash("Author name cannot be empty")
+            return redirect(url_for("add_author"))
+
+        birthdate = datetime.strptime(
+            request.form.get("birthdate"), "%Y-%m-%d"
+        ).date()
+
+        date_of_death = request.form.get("date_of_death")
+        date_of_death = (
+            datetime.strptime(date_of_death, "%Y-%m-%d").date()
+            if date_of_death else None
+        )
+
+        try:
+            author = Author(
+                name=name,
+                birth_date=birthdate,
+                date_of_death=date_of_death
+            )
+            db.session.add(author)
+            db.session.commit()
+            flash("Author added successfully")
+        except IntegrityError:
+            db.session.rollback()
+            flash("An author with this name already exists")
 
         return redirect(url_for("add_author"))
 
     return render_template("add_author.html")
+
 
 @app.route("/add_book", methods=["GET", "POST"])
 def add_book():
@@ -77,7 +97,7 @@ def add_book():
             )
             db.session.add(book)
             db.session.commit()
-            flash("Book added successfully ✅")
+            flash("Book added successfully")
         except IntegrityError:
             db.session.rollback()
             flash("A book with this ISBN already exists ⚠️")
@@ -86,7 +106,7 @@ def add_book():
 
     return render_template("add_book.html", authors=authors)
 
-# ---------------- Delete Book ----------------
+
 @app.route("/book/<int:book_id>/delete", methods=["POST"])
 def delete_book(book_id):
     book = Book.query.get_or_404(book_id)

@@ -10,11 +10,14 @@
 <h2>Add Book</h2>
 <button id="theme-toggle">🌙 Dark mode</button>
 
+<!-- Flash Messages -->
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    {% for message in messages %}
-      <div class="flash">{{ message }}</div>
-    {% endfor %}
+    <ul class="flash-messages">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
   {% endif %}
 {% endwith %}
 

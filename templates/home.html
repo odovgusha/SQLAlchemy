@@ -8,14 +8,23 @@
 <body>
 
 <h1>My Digital Library</h1>
+
+<!-- Top Navigation -->
+<nav class="top-nav">
+  <a href="{{ url_for('add_author') }}">➕ Add Author</a> |
+  <a href="{{ url_for('add_book') }}">📘 Add Book</a>
+</nav>
+
 <button id="theme-toggle">🌙 Dark mode</button>
 
 <!-- Flash Messages -->
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    {% for message in messages %}
-      <div class="flash">{{ message }}</div>
-    {% endfor %}
+    <ul class="flash-messages">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
   {% endif %}
 {% endwith %}
 
@@ -56,11 +65,6 @@
   <p>No books found.</p>
 {% endfor %}
 
-<p>
-  <a href="/add_author">Add Author</a> |
-  <a href="/add_book">Add Book</a>
-</p>
-
 <script>
   const toggleBtn = document.getElementById("theme-toggle");
   const savedTheme = localStorage.getItem("theme");
@@ -86,3 +90,4 @@
 
 </body>
 </html>
+xxx
